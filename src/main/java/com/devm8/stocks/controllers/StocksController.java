@@ -20,11 +20,7 @@ public class StocksController {
 
 
     public ResponseEntity<?> getAllSupportedStocks() {
-        List<Stock> allStocks = stocksService.getAllStocks();
-        if (allStocks.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(allStocks);
+        return ResponseEntity.notFound().build();
     }
 
 }

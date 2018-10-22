@@ -1,6 +1,7 @@
 package com.devm8.stocks.services.gmail;
 
 import com.devm8.stocks.entities.Alarm;
+import com.devm8.stocks.entities.Stock;
 import com.devm8.stocks.services.MailService;
 
 import javax.mail.*;
@@ -16,9 +17,13 @@ public class GmailService implements MailService {
 
 
     @Override
-    public void sendNotification(String email, Alarm alarm) {
+    public void sendNotification(String email, Alarm alarm, Stock stock) {
 
-        String message = "The stock value " + alarm.getStock() + " was updated. \n";
+        String message = String.format("The stock value of %s was updated. \n" +
+                "Initial price: %.4f.\n" +
+                "Current price: %.4f.\n" +
+                "Difference: %.4f.\n", stock.getStockName(), alarm.getStartingPrice(), stock.getCurrentPrice(), stock.getCurrentDifference());
+
 
         sendMail(email, "Stock value was updated", message);
     }
